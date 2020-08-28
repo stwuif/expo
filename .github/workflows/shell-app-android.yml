@@ -30,9 +30,8 @@ jobs:
           echo "::add-path::$(pwd)/bin"
           echo "::set-env name=EXPO_ROOT_DIR::$(pwd)"
       - run: sudo apt-get install awscli
-      - name: Check that Android packages are up-to-date
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: expotools check-android-packages
+      - name: Build Android packages
+        run: expotools android-build-packages --packages all
       - name: Build shell app tarball
         run: ./buildAndroidTarballLocally.sh
       - name: Make an artifact
